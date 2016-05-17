@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+    first:
+        build: ./ethereum-node
+        environment:
+            NODE_NAME: first
+    second:
+        build: ./ethereum-node
+        environment:
+            NODE_NAME: second
+        depends_on:
+            - first
+        links:
+            - first
+        
