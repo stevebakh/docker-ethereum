@@ -6,8 +6,18 @@ services:
         image: substrate/ethereum-node
         expose:
             - "30303"
+        volumes:
+            - connection_data:/tmp
         networks:
             - node_net
+
+volumes:
+    connection_data:
+        driver: local
+        driver_opts:
+            type: tmpfs
+            device: tmpfs
+            o: "size=10m"
 
 networks:
     node_net:
