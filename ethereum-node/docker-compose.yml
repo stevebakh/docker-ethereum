@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+    node:
+        build: .
+        expose:
+            - "30303"
