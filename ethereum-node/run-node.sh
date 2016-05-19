@@ -1,6 +1,9 @@
 #!/bin/bash
 
-geth --datadir ./chain --password ./account-password.txt account new > ./account.txt
+if [ ! -f ./account.txt ]; then
+    echo "First time running node, creating new account. See: ${PWD}/account.txt"
+    geth --datadir ./chain --password ./account-password.txt account new > ./account.txt
+fi
 
 geth --datadir ./chain \
      --networkid 4827 \
