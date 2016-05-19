@@ -1,16 +1,21 @@
 version: '2'
 
 services:
-    first:
+    node_a:
         build: ./ethereum-node
+        expose:
+            - "30303"
+        ports:
+            - "30303:30303"
         environment:
-            NODE_NAME: first
-    second:
+            NODE_NAME: NodeA
+    node_b:
         build: ./ethereum-node
-        environment:
-            NODE_NAME: second
-        depends_on:
-            - first
+        expose:
+            - "30303"
+        ports:
+            - "30304:30303"
         links:
-            - first
-        
+            - node_a
+        environment:
+            NODE_NAME: NodeB

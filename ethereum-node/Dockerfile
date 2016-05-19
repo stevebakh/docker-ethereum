@@ -4,14 +4,15 @@ MAINTAINER Steven Bakhtiari
 
 ENV NODE_NAME ethnode
 
+WORKDIR /opt/eth
+
 COPY ./genesis-block.json .
 COPY ./account-password.txt .
+COPY ./run-node.sh .
 
+RUN chmod a+x ./run-node.sh
 RUN geth --datadir ./chain init ./genesis-block.json
-RUN geth --datadir ./chain --password ./account-password.txt account new > ./account.txt
+RUN mkdir -p ~/.ethash && geth --datadir ./chain makedag 0 ~/.ethash
 
-CMD geth --datadir ./chain --networkid 4827 --password ./account-password.txt \
-         --rpc --rpcaddr "0.0.0.0" --rpccorsdomain "*" \
-         --rpcapi "admin,eth,debug,miner,net,shh,txpool,personal,web3" \
-         --mine --minerthreads 1 --identity ${NODE_NAME}
+CMD ./run-node.sh
 
