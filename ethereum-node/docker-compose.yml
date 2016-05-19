@@ -8,8 +8,6 @@ services:
             - "30303"
         volumes:
             - connection_data:/tmp
-        networks:
-            - node_net
 
 volumes:
     connection_data:
@@ -18,12 +16,4 @@ volumes:
             type: tmpfs
             device: tmpfs
             o: "size=10m"
-
-networks:
-    node_net:
-        ipam:
-            driver: default
-            config:
-                - subnet: 122.0.0.0/24
-                  gateway: 122.0.0.1
 
