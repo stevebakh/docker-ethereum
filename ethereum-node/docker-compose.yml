@@ -6,3 +6,14 @@ services:
         image: substrate/ethereum-node
         expose:
             - "30303"
+        networks:
+            - node_net
+
+networks:
+    node_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 122.0.0.0/24
+                  gateway: 122.0.0.1
+
