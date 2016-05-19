@@ -15,5 +15,4 @@ geth --datadir ./chain \
      --rpcapi "admin,eth,debug,miner,net,shh,txpool,personal,web3" \
      --mine \
      --minerthreads 1 \
-     --identity ${NODE_NAME} \
      --nodiscover

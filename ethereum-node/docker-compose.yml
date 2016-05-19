@@ -3,5 +3,6 @@ version: '2'
 services:
     node:
         build: .
+        image: substrate/ethereum-node
         expose:
             - "30303"

@@ -2,8 +2,6 @@ FROM substrate/ethereum-base
 
 MAINTAINER Steven Bakhtiari
 
-ENV NODE_NAME ethnode
-
 WORKDIR /opt/eth
 
 COPY ./account-password.txt .
