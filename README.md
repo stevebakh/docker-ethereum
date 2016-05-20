@@ -31,6 +31,23 @@ In short, I wanted to learn about Ethereum (how it works and how to use it). I h
 
 Feedback, pull requests, suggestions, friendly conversation welcome.
 
+##So, uhh, are my nodes actually connected?
+
+Watching the logs should give you an indication of when the nodes are all connected. You can also attach a shell instance to any of the containers and access the `geth` interactive console. First, get a list of the containers. Select one of the Ethereum nodes and execute a bash instance on it:
+
+```
+$ docker ps
+$ docker exec -it <container-id> bash
+```
+
+Now you can attach to the running `geth` instance and view the connected peers:
+
+```
+# geth --datadir /opt/eth/chain attach ipc:/opt/eth/chain/geth.ipc
+> admin.peers
+...
+```
+
 ##Troubleshooting
 
 If you're running into any problems using these Docker images or the Compose config, please let me know. I'm using the following tools:
