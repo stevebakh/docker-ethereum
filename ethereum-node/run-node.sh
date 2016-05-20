@@ -2,7 +2,7 @@
 
 # Get this node's 'enode url'. Other nodes will use this to connect.
 JS="'enode://' + admin.nodeInfo.id + '@' + '$(hostname -i):' + admin.nodeInfo.ports.discovery"
-ENODE_URL=$(geth --datadir ./chain --exec "${JS}" console 2>/dev/null)
+ENODE_URL=$(geth --datadir ./chain --exec "${JS}" console 2>/dev/null | sed -e 's/^"\(.*\)"$/\1/')
 
 echo "Adding this node's  connection details to /tmp/nodes"
 echo $ENODE_URL >> /tmp/nodes
@@ -23,8 +23,7 @@ fi
 # Load any node connection details, filtering out the details for this node.
 while read -r LINE; do
     if [ ${LINE} != ${ENODE_URL} ]; then
-        URL=$(echo ${LINE} | sed -e 's/^"\(.*\)"$/\1/')
-        BOOTNODES="${URL},${BOOTNODES}"
+        BOOTNODES="${LINE},${BOOTNODES}"
     fi
 done < /tmp/nodes
 
